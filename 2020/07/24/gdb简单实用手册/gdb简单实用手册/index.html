@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>gdb简单实用手册 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#Gdb 简单实用手册(GDB) info reg：显示所有寄存器。可以简写为：i r。如果要查看具体的寄存器可以这样：i $ebx(GDB) p $eax：显示eax寄存器内容。也可以显示rsp的指针位置 例如：(GDB) p $rsp+8 (GDB) p&#x2F;c $eax：用字符显示eax寄存器内容，反斜杠后面的是显示格式，可使用的格式见下表：该表在显示内存内容的x命令中也是通用的。 (gdb)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gdb简单实用手册">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#Gdb 简单实用手册(GDB) info reg：显示所有寄存器。可以简写为：i r。如果要查看具体的寄存器可以这样：i $ebx(GDB) p $eax：显示eax寄存器内容。也可以显示rsp的指针位置 例如：(GDB) p $rsp+8 (GDB) p&#x2F;c $eax：用字符显示eax寄存器内容，反斜杠后面的是显示格式，可使用的格式见下表：该表在显示内存内容的x命令中也是通用的。 (gdb)">
+<meta property="og:image" content="http://yoursite.com/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/breakpoint.png">
+<meta property="article:published_time" content="2020-07-24T01:13:51.000Z">
+<meta property="article:modified_time" content="2020-07-24T01:34:18.859Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/breakpoint.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gdb简单实用手册/gdb简单实用手册" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/" class="article-date">
+  <time datetime="2020-07-24T01:13:51.000Z" itemprop="datePublished">2020-07-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gdb简单实用手册
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>#Gdb 简单实用手册</code></pre><p>(GDB) info reg：显示所有寄存器。可以简写为：i r。如果要查看具体的寄存器可以这样：i $ebx<br>(GDB) p $eax：显示eax寄存器内容。<br>也可以显示rsp的指针位置 例如：(GDB) p $rsp+8<br> (GDB) p/c $eax：用字符显示eax寄存器内容，反斜杠后面的是显示格式，可使用的格式见下表：该表在显示内存内容的x命令中也是通用的。</p>
+<p>(gdb) disas $pc    显示当前程序的反编译代码<br>x/s  $eax     显示 寄存器里的内容  x/s 为以字符串显示， x/d 十进制  x/t 二进制  也可以显示地址内容</p>
+<p>step i 往后移一步<br>step  移出本函数<br>b （XXX）设置断点<br><img src="breakpoint.png" alt="breakpoint"></p>
+<p>用gdb查看内存</p>
+<p>格式: x /nfu <addr></p>
+<p>说明<br>x 是 examine 的缩写</p>
+<p>n表示要显示的内存单元的个数</p>
+<p>f表示显示方式, 可取如下值<br>x 按十六进制格式显示变量。<br>d 按十进制格式显示变量。<br>u 按十进制格式显示无符号整型。<br>o 按八进制格式显示变量。<br>t 按二进制格式显示变量。<br>a 按十六进制格式显示变量。<br>i 指令地址格式<br>c 按字符格式显示变量。<br>f 按浮点数格式显示变量。</p>
+<p>u表示一个地址单元的长度<br>b表示单字节，<br>h表示双字节，<br>w表示四字节，<br>g表示八字节</p>
+<p>Format letters are o(octal), x(hex), d(decimal), u(unsigneddecimal),<br>t(binary), f(float), a(address), i(instruction), c(char) ands(string).<br>Size letters are b(byte), h(halfword), w(word), g(giant, 8bytes)</p>
+<p>举例<br>x/3uh buf<br>表示从内存地址buf读取内容，<br>h表示以双字节为一个单位，<br>3表示三个单位，<br>u表示按十六进制显示<br>————————————————<br>版权声明：本文为CSDN博主「我打打江南走过过」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/baidu_24256693/java/article/details/47298513" target="_blank" rel="noopener">https://blog.csdn.net/baidu_24256693/java/article/details/47298513</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="ckczjrcsi00001gi40q9z5f33" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/22/MyFamily/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MyFamily</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/family/" rel="tag">family</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/family/" style="font-size: 10px;">family</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">gdb简单实用手册</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/22/MyFamily/">MyFamily</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/22/MyFamily/MyFamily/">MyFamily</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/David-s-first-blog/">David&#39;s first blog</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

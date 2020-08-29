@@ -11,7 +11,6 @@
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -63,6 +62,53 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-gdb简单实用手册/gdb简单实用手册" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/" class="article-date">
+  <time datetime="2020-07-24T01:13:51.000Z" itemprop="datePublished">2020-07-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">gdb简单实用手册</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>#Gdb 简单实用手册</code></pre><p>(GDB) info reg：显示所有寄存器。可以简写为：i r。如果要查看具体的寄存器可以这样：i $ebx<br>(GDB) p $eax：显示eax寄存器内容。<br>也可以显示rsp的指针位置 例如：(GDB) p $rsp+8<br> (GDB) p/c $eax：用字符显示eax寄存器内容，反斜杠后面的是显示格式，可使用的格式见下表：该表在显示内存内容的x命令中也是通用的。</p>
+<p>(gdb) disas $pc    显示当前程序的反编译代码<br>x/s  $eax     显示 寄存器里的内容  x/s 为以字符串显示， x/d 十进制  x/t 二进制  也可以显示地址内容</p>
+<p>step i 往后移一步<br>step  移出本函数<br>b （XXX）设置断点<br><img src="breakpoint.png" alt="breakpoint"></p>
+<p>用gdb查看内存</p>
+<p>格式: x /nfu <addr></p>
+<p>说明<br>x 是 examine 的缩写</p>
+<p>n表示要显示的内存单元的个数</p>
+<p>f表示显示方式, 可取如下值<br>x 按十六进制格式显示变量。<br>d 按十进制格式显示变量。<br>u 按十进制格式显示无符号整型。<br>o 按八进制格式显示变量。<br>t 按二进制格式显示变量。<br>a 按十六进制格式显示变量。<br>i 指令地址格式<br>c 按字符格式显示变量。<br>f 按浮点数格式显示变量。</p>
+<p>u表示一个地址单元的长度<br>b表示单字节，<br>h表示双字节，<br>w表示四字节，<br>g表示八字节</p>
+<p>Format letters are o(octal), x(hex), d(decimal), u(unsigneddecimal),<br>t(binary), f(float), a(address), i(instruction), c(char) ands(string).<br>Size letters are b(byte), h(halfword), w(word), g(giant, 8bytes)</p>
+<p>举例<br>x/3uh buf<br>表示从内存地址buf读取内容，<br>h表示以双字节为一个单位，<br>3表示三个单位，<br>u表示按十六进制显示<br>————————————————<br>版权声明：本文为CSDN博主「我打打江南走过过」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/baidu_24256693/java/article/details/47298513" target="_blank" rel="noopener">https://blog.csdn.net/baidu_24256693/java/article/details/47298513</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="ckczjrcsi00001gi40q9z5f33" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-MyFamily" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -272,6 +318,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/24/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/gdb%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">gdb简单实用手册</a>
+          </li>
         
           <li>
             <a href="/2020/07/22/MyFamily/">MyFamily</a>
